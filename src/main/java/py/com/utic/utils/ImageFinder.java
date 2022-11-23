@@ -13,7 +13,7 @@ import java.net.URL;
 public class ImageFinder {
 
     public String getImageUrl(String brand, String model) {
-        String response = getImages(brand.toLowerCase().concat("-").concat(model.replace(" ", ".").toLowerCase()));
+        String response = getImages(brand.toLowerCase().concat("-Motors-").concat(model.replace(" ", ".").toLowerCase()));
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
