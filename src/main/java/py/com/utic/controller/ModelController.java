@@ -2,8 +2,11 @@ package py.com.utic.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import py.com.utic.entity.Brand;
 import py.com.utic.entity.Model;
+import py.com.utic.service.BrandService;
 import py.com.utic.service.ModelService;
+import py.com.utic.utils.ImageFinder;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,10 @@ public class ModelController {
 
     @Autowired
     private ModelService service;
+
+    @Autowired
+    private BrandService brandService;
+
 
     @GetMapping("/utic/model")
     public List<Model> getAll(){
@@ -27,6 +34,9 @@ public class ModelController {
 
     @PostMapping("utic/model")
     public void save(@RequestBody Model model){
+        ImageFinder finder = new ImageFinder();
+        Optional<Brand> brand= brandService.getById(Long.valueOf(model.getIdBrand()));
+        model.setImage(finder.getImageUrl(brand.get().getName(),model.getName()));
         service.save(model);
     }
 

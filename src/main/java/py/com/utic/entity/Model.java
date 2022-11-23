@@ -20,4 +20,5 @@ public class Model {
     @Column(name="id_brand")
     private Integer idBrand;
     private String description;
+    private String image;
 }
